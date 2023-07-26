@@ -8,12 +8,12 @@ namespace TicketMS.Repositories
     {
         IEnumerable<Order> GetAll();
 
-        Order GetByOrderId(int id);
+       Task<Order> GetByOrderId(int id);
 
         int Add(Order @order);
 
         void Update(Order @order);
 
-        int Delete(int id);
+        void Delete(Order @order);
     }
 }

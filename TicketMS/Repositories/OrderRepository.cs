@@ -21,10 +21,11 @@ namespace TicketMS.Repositories
         throw new NotImplementedException();
     }
 
-    public int Delete(int id)
+    public void Delete(Order @order)
     {
-        throw new NotImplementedException();
-    }
+            _dbContext.Remove(@order);
+            _dbContext.SaveChanges();
+        }
 
     public IEnumerable<Order> GetAll()
     {
@@ -33,16 +34,17 @@ namespace TicketMS.Repositories
         return orders;
     }
 
-    public Order GetByOrderId(int id)
+    public async Task<Order> GetByOrderId(int id)
     {
-        var @order = _dbContext.Orders.Where(e => e.OrderId == id).FirstOrDefault();
+        var @order =await _dbContext.Orders.Where(e => e.OrderId == id).FirstOrDefaultAsync();
 
         return @order;
     }
 
     public void Update(Order @order)
     {
-        throw new NotImplementedException();
-    }
+            _dbContext.Entry(@order).State = EntityState.Modified;
+            _dbContext.SaveChanges();
+        }
 }
 }

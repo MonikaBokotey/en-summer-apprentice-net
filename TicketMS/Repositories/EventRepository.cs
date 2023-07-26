@@ -46,9 +46,9 @@ namespace TicketMS.Repositories
             return events;
         }
 
-        public Event GetByEventId(int id)
+        public async Task<Event> GetByEventId(int id)
         {
-            var @event = _dbContext.Events.Where(e => e.EventId == id).FirstOrDefault();
+            var @event =await _dbContext.Events.Where(e => e.EventId == id).FirstOrDefaultAsync();
 
             return @event;
         }

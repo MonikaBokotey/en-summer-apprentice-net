@@ -8,7 +8,7 @@ namespace TicketMS.Repositories
     {
         IEnumerable<Event> GetAll();
 
-        Event GetByEventId(int id);
+        Task<Event> GetByEventId(int id);
 
         int Add(Event @event);
 

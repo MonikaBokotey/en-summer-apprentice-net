@@ -12,7 +12,7 @@
         public int? TotalPrice { get; set; }
 
         public string Customer { get; set; }
-        public  string TicketCategory { get; set; }   
+        public  int TicketCategoryId { get; set; }   
 
 
     }

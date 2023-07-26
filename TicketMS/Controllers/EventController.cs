@@ -29,24 +29,24 @@ namespace TicketMS.Controllers
         {
             var events = _eventRepository.GetAll();
 
-            var dtoEvents = events.Select(e => new EventDto()
-            {
-                EventId = e.EventId,
-                EventDescription = e.EventDescription,
-                EventName = e.EventName,
-                EventType = e.EventType?.EventTypeName ?? string.Empty,
-                Venue = e.Venue?.Location ?? string.Empty
-            });
+            //var dtoEvents = events.Select(e => new EventDto()
+            //{
+            //    EventId = e.EventId,
+            //    EventDescription = e.EventDescription,
+            //    EventName = e.EventName,
+            //    EventType = e.EventType?.EventTypeName ?? string.Empty,
+            //    Venue = e.Venue?.Location ?? string.Empty
+            //});
 
-
-            return Ok(dtoEvents);
+            var eventDto = events.Select(e =>_mapper.Map<EventDto>(e));
+            return Ok(eventDto);
         }
 
 
         [HttpGet]
-        public ActionResult<EventDto> GetByEventId(int id)
+        public async Task<ActionResult<EventDto>> GetByEventId(int id)
         {
-            var @event = _eventRepository.GetByEventId(id);
+            var @event = await _eventRepository.GetByEventId(id);
 
             if (@event == null)
             {
@@ -67,9 +67,9 @@ namespace TicketMS.Controllers
         }
 
         [HttpPatch]
-        public ActionResult<EventPatchDto> Patch(EventPatchDto eventPatch)
+        public async Task<ActionResult<EventPatchDto>> Patch(EventPatchDto eventPatch)
         {
-           var eventEntity= _eventRepository.GetByEventId(eventPatch.EventId);
+           var eventEntity= await _eventRepository.GetByEventId(eventPatch.EventId);
             if(eventEntity == null)
             {
                 return NotFound();
@@ -81,9 +81,9 @@ namespace TicketMS.Controllers
         }
 
         [HttpDelete]
-        public ActionResult Delete(int id)
+        public async Task <ActionResult> Delete(int id)
         {
-            var eventEntity = _eventRepository.GetByEventId(id);
+            var eventEntity =await _eventRepository.GetByEventId(id);
             if (eventEntity == null)
             {
                 return NotFound();

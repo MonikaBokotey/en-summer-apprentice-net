@@ -6,6 +6,8 @@ namespace TicketMS.Repositories
     {
         TicketCategory GetByEventId(int id);
 
+        int GetTicketIdByTicketCategoryId(int id);
+
         void Update(Event @event);
 
 
