@@ -1,6 +1,7 @@
 ﻿using TicketMS.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using TMS.Api.Exceptions;
 
 namespace TicketMS.Repositories
 {
@@ -49,6 +50,9 @@ namespace TicketMS.Repositories
         public async Task<Event> GetByEventId(int id)
         {
             var @event =await _dbContext.Events.Where(e => e.EventId == id).FirstOrDefaultAsync();
+
+            if (@event == null)
+                throw new EntityNotFoundException(id, nameof(Event));
 
             return @event;
         }

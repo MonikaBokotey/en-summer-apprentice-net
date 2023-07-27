@@ -29,15 +29,7 @@ namespace TicketMS.Controllers
         {
             var orders = _orderRepository.GetAll();
 
-            //var dtoOrders = orders.Select(o => new OrderDto()
-            //{
-            //    OrderId = o.OrderId,
-            //    NumberOfTickets = o.NumberOfTickets,
-            //    OrderedAt = o.OrderedAt,
-            //    Customer = o.Customer?.CustomerName ?? string.Empty,
-            //    TicketCategory = o.TicketCategory?.Description?? string.Empty
-            //});
-
+     
             var orderDto = orders.Select(o => _mapper.Map<OrderDto>(o));
             return Ok(orderDto);
         }
@@ -47,22 +39,6 @@ namespace TicketMS.Controllers
         public async Task<ActionResult<OrderDto>> GetByOrderId(int id)
         {
             var @orders =await _orderRepository.GetByOrderId(id);
-
-            if (@orders == null)
-            {
-                return NotFound();
-            }
-
-            //var dtoOrder = new OrderDto()
-            //{
-            //    OrderId = @orders.OrderId,
-            //    NumberOfTickets = @orders.NumberOfTickets,
-            //    OrderedAt = @orders.OrderedAt,
-            //    Customer = @orders.Customer?.CustomerName ?? string.Empty,
-            //    TicketCategory = @orders.TicketCategory?.Description ?? string.Empty
-            //};  
-
-
             var orderDto = _mapper.Map<OrderDto>(@orders);
             return Ok(orderDto);
         }
@@ -71,12 +47,6 @@ namespace TicketMS.Controllers
         public async Task<ActionResult<OrderPatchDto>> Patch(OrderPatchDto orderPatch)
         {
             var orderEntity =await _orderRepository.GetByOrderId(orderPatch.OrderId);
-            
-
-            if (orderEntity == null)
-            {
-                return NotFound();
-            }
 
             if (orderPatch.NumberOfTickets.HasValue) orderEntity.NumberOfTickets = orderPatch.NumberOfTickets;
             if (orderPatch.TicketCategoryId!=0) orderEntity.TicketCategoryId = orderPatch.TicketCategoryId;
@@ -93,10 +63,7 @@ namespace TicketMS.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var orderEntity = await _orderRepository.GetByOrderId(id);
-            if (orderEntity == null)
-            {
-                return NotFound();
-            }
+        
             _orderRepository.Delete(orderEntity);
             return NoContent();
         }

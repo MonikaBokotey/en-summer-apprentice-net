@@ -29,15 +29,6 @@ namespace TicketMS.Controllers
         {
             var events = _eventRepository.GetAll();
 
-            //var dtoEvents = events.Select(e => new EventDto()
-            //{
-            //    EventId = e.EventId,
-            //    EventDescription = e.EventDescription,
-            //    EventName = e.EventName,
-            //    EventType = e.EventType?.EventTypeName ?? string.Empty,
-            //    Venue = e.Venue?.Location ?? string.Empty
-            //});
-
             var eventDto = events.Select(e =>_mapper.Map<EventDto>(e));
             return Ok(eventDto);
         }
@@ -48,19 +39,8 @@ namespace TicketMS.Controllers
         {
             var @event = await _eventRepository.GetByEventId(id);
 
-            if (@event == null)
-            {
-                return NotFound();
-            }
-
-            //var dtoEvent = new EventDto()
-            //{
-            //    EventId = @event.EventId,
-            //    EventDescription = @event.EventDescription,
-            //    EventName = @event.EventName,
-            //    EventType = @event.EventType?.EventTypeName ?? string.Empty,
-            //    Venue = @event.Venue?.Location ?? string.Empty
-            //};
+    
+       
 
             var eventDto=_mapper.Map<EventDto>(@event); 
             return Ok(eventDto);
@@ -70,11 +50,7 @@ namespace TicketMS.Controllers
         public async Task<ActionResult<EventPatchDto>> Patch(EventPatchDto eventPatch)
         {
            var eventEntity= await _eventRepository.GetByEventId(eventPatch.EventId);
-            if(eventEntity == null)
-            {
-                return NotFound();
-            }
-
+         
             _mapper.Map(eventPatch, eventEntity);
             _eventRepository.Update(eventEntity);
             return Ok(eventEntity);
@@ -83,15 +59,11 @@ namespace TicketMS.Controllers
         [HttpDelete]
         public async Task <ActionResult> Delete(int id)
         {
+
+
             var eventEntity =await _eventRepository.GetByEventId(id);
-            if (eventEntity == null)
-            {
-                return NotFound();
-            }
-            //TicketCategoryPatch tcp = new TicketCategoryPatch();
-            //tcp.EventId = 8;
-            //_mapper.Map(tcp, eventEntity);
-            //_ticketCategoryRepository.Update(eventEntity);
+    
+
             _eventRepository.Delete(eventEntity);
             return NoContent();
         }

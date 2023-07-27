@@ -1,6 +1,8 @@
 
+using NLog.Web;
 using TicketMS.Repositories;
 using TicketMS.Service;
+using TMS.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
+
+//Insert dependency injection for Logger
+builder.Logging.ClearProviders();
+builder.Host.UseNLog();
 
 builder.Services.AddTransient<IEventRepository, EventRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -27,6 +33,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseAuthorization();
 

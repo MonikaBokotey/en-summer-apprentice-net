@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Monika\\Desktop\\en-summer-apprentice-net\\TicketMS\\TicketMS.csproj": {}
+    "C:\\Users\\Monika\\Desktop\\plz_work\\TicketMS\\TicketMS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Monika\\Desktop\\en-summer-apprentice-net\\TicketMS\\TicketMS.csproj": {
+    "C:\\Users\\Monika\\Desktop\\plz_work\\TicketMS\\TicketMS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Monika\\Desktop\\en-summer-apprentice-net\\TicketMS\\TicketMS.csproj",
+        "projectUniqueName": "C:\\Users\\Monika\\Desktop\\plz_work\\TicketMS\\TicketMS.csproj",
         "projectName": "TicketMS",
-        "projectPath": "C:\\Users\\Monika\\Desktop\\en-summer-apprentice-net\\TicketMS\\TicketMS.csproj",
+        "projectPath": "C:\\Users\\Monika\\Desktop\\plz_work\\TicketMS\\TicketMS.csproj",
         "packagesPath": "C:\\Users\\Monika\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Monika\\Desktop\\en-summer-apprentice-net\\TicketMS\\obj\\",
+        "outputPath": "C:\\Users\\Monika\\Desktop\\plz_work\\TicketMS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Monika\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,6 +53,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.9, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[5.2.2, )"
+            },
+            "NLog.Web.AspNetCore": {
+              "target": "Package",
+              "version": "[5.3.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
