@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using TicketMS.Models;
 using AutoMapper;
 using TicketMS.Models.Dto;
+using TMS.Api.Exceptions;
 
 namespace TicketMS.Controllers
 {
@@ -15,13 +16,13 @@ namespace TicketMS.Controllers
     {
         private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
-        private readonly ITicketCategoryRepository _ticketCategoryRepository;
+        
 
-        public EventController(IEventRepository eventRepository,IMapper mapper, ITicketCategoryRepository ticketCategoryRepository)
+        public EventController(IEventRepository eventRepository,IMapper mapper)
         {
             _eventRepository = eventRepository;
             _mapper = mapper;
-            _ticketCategoryRepository = ticketCategoryRepository;
+          
         }
 
         [HttpGet]
@@ -37,13 +38,21 @@ namespace TicketMS.Controllers
         [HttpGet]
         public async Task<ActionResult<EventDto>> GetByEventId(int id)
         {
-            var @event = await _eventRepository.GetByEventId(id);
+            try
+            {var @event = await _eventRepository.GetByEventId(id);
 
     
        
 
             var eventDto=_mapper.Map<EventDto>(@event); 
             return Ok(eventDto);
+
+            }
+            catch(EntityNotFoundException ex)
+            {
+                return NotFound(new {ErrorMessage=ex.Message});
+            }
+            
         }
 
         [HttpPatch]

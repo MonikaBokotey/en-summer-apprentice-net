@@ -269,3 +269,5 @@ C:\Users\Monika\Desktop\plz_work\TicketMS\bin\Debug\net6.0\nlog.config
 C:\Users\Monika\Desktop\plz_work\TicketMS\bin\Debug\net6.0\NLog.dll
 C:\Users\Monika\Desktop\plz_work\TicketMS\bin\Debug\net6.0\NLog.Extensions.Logging.dll
 C:\Users\Monika\Desktop\plz_work\TicketMS\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+C:\Users\Monika\Desktop\plz_work\TicketMS\bin\Debug\net6.0\Castle.Core.dll
+C:\Users\Monika\Desktop\plz_work\TicketMS\bin\Debug\net6.0\Moq.dll
