@@ -39,7 +39,9 @@ namespace TicketMS.Controllers
         public async Task<ActionResult<EventDto>> GetByEventId(int id)
         {
             try
-            {var @event = await _eventRepository.GetByEventId(id);
+            {
+                
+                var @event = await _eventRepository.GetByEventId(id);
 
     
        

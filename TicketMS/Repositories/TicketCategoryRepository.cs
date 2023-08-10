@@ -36,6 +36,19 @@ namespace TicketMS.Repositories
             return -1;
         }
 
+        public int GetTicketCategoryIdByDescriptionAndEvent(int event_id, string description)
+        {
+            var ticketCategory = _dbContext.TicketCategories
+                                          .Where(t => t.EventId == event_id && t.Description == description)
+                                          .FirstOrDefault();
+
+            if (ticketCategory != null)
+            {
+                return ticketCategory.TicketCategoryId;
+            }
+
+            return -1;
+        }
 
         public void Update(Event @event)
         {
