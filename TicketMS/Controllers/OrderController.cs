@@ -43,6 +43,15 @@ namespace TicketMS.Controllers
             return Ok(orderDto);
         }
 
+
+        [HttpGet]
+        public string GetEventNameByOrderId(int event_id)
+        {
+            var  eventName= _orderRepository.GetEventNameByOrderId(event_id);
+            return eventName;
+        }
+
+
         [HttpPatch]
         public async Task<ActionResult<OrderPatchDto>> Patch(OrderPatchDto orderPatch)
         {

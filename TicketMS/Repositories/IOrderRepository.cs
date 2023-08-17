@@ -10,6 +10,7 @@ namespace TicketMS.Repositories
 
        Task<Order> GetByOrderId(int id);
 
+        string GetEventNameByOrderId(int id);
         int Add(Order @order);
 
         void Update(Order @order);

@@ -44,7 +44,22 @@ namespace TicketMS.Repositories
             return @order;
     }
 
-    public void Update(Order @order)
+        public string GetEventNameByOrderId(int id)
+        {
+            var eventName = _dbContext.Orders
+                .Where(e => e.OrderId == id)
+                .Select(o => o.TicketCategory.Event.EventName)
+                .FirstOrDefault();
+
+            if (eventName == null)
+                throw new EntityNotFoundException(id, nameof(Order));
+
+            return eventName;
+        }
+
+
+
+        public void Update(Order @order)
     {
             _dbContext.Entry(@order).State = EntityState.Modified;
             _dbContext.SaveChanges();
